@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+	/* breakpoints */
+	--breakpoint-2xl: 90rem;
+
+	/* colors */
+	--color-primary-blue: #0671e0;
+
+	--color-brand-primary: #4caf4f;
+	--color-brand-info: #2194f3;
+
+	--color-action-warning: #fbc02d;
+	--color-action-error: #e53835;
+	--color-action-success: #2e7d31;
+
+	--color-neutral-black: #263238;
+	--color-neutral-dark-grey: #4d4d4d;
+	--color-neutral-grey: #717171;
+	--color-neutral-light-grey: #89939e;
+	--color-neutral-grey-blue: #abbed1;
+	--color-neutral-silver: #f5f7fa;
+	--color-neutral-white: #ffffff;
+
+	--color-shade-1: #43a046;
+	--color-shade-2: #388e3b;
+	--color-shade-3: #237d31;
+	--color-shade-4: #1b5e1f;
+	--color-shade-5: #103e13;
+
+	--color-tint-1: #66bb69;
+	--color-tint-2: #81c784;
+	--color-tint-3: #a5d6a7;
+	--color-tint-4: #c8e6c9;
+	--color-tint-5: #e8f5e9;
+
+	/* fonts */
+	--font-sans: "Inter", Arial, sans-serif;
+
+	--text-headline-1: 4rem;
+	--text-headline-1--line-height: 4.75rem;
+	--text-headline-1--font-weight: 600;
+
+	--text-headline-2: 2.25rem;
+	--text-headline-2--line-height: 2.75rem;
+	--text-headline-2--font-weight: 600;
+
+	--text-headline-3: 1.75rem;
+	--text-headline-3--line-height: 2.25rem;
+	--text-headline-3--font-weight: 700;
+
+	--text-headline-4: 1.25rem;
+	--text-headline-4--line-height: 1.75rem;
+	--text-headline-4--font-weight: 600;
+
+	--text-body-1: 1.125rem;
+	--text-body-1--line-height: 1.75rem;
+
+	--text-body-2: 1rem;
+	--text-body-2--line-height: 1.5rem;
+
+	--text-body-3: 0.875rem;
+	--text-body-3--line-height: 1.25rem;
+
+	--text-body-4: 0.75rem;
+	--text-body-4--line-height: 1rem;
+
+	/* header */
+	--header-h: 4.25rem;
+}
+
+@layer base {
+	body {
+		@apply min-w-80;
+	}
+}
+
+@layer components {
+	.container {
+		@apply mx-auto px-3;
+	}
+}
+
+@utility container {
+	@variant 2xl {
+		max-inline-size: 72rem;
+	}
+}
