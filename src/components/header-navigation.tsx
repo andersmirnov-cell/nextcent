@@ -60,10 +60,10 @@ export function HeaderNavigation({ links, isOpenMobileMenu }: HeaderNavigationPr
 		disableScroll: "overflow-clip",
 	};
 	const menuListClassNames = {
-		mobile: "flex-col gap-y-2 mx-auto w-full max-w-160 md:max-w-3xl",
+		mobile: "flex-col gap-y-2 mx-auto w-full max-w-160 my-5 md:max-w-3xl",
 	};
 	const menuButtonsClassNames = {
-		mobile: "mx-auto w-full mt-10 max-w-160 md:max-w-3xl",
+		mobile: "mx-auto w-full mt-10 mb-5 max-w-160 md:max-w-3xl",
 	};
 
 	return (

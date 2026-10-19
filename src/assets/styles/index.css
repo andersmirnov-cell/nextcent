@@ -14,6 +14,7 @@
 	--color-action-error: #e53835;
 	--color-action-success: #2e7d31;
 
+	--color-neutral-darkest: #18191f;
 	--color-neutral-black: #263238;
 	--color-neutral-dark-grey: #4d4d4d;
 	--color-neutral-grey: #717171;
@@ -35,7 +36,7 @@
 	--color-tint-5: #e8f5e9;
 
 	/* fonts */
-	--font-sans: "Inter", Arial, sans-serif;
+	--font-sans: "Inter Variable", sans-serif;
 
 	--text-headline-1: 4rem;
 	--text-headline-1--line-height: 4.75rem;
@@ -65,13 +66,34 @@
 	--text-body-4: 0.75rem;
 	--text-body-4--line-height: 1rem;
 
+	/* shadows (Figma Shadow/*px styles) */
+	--shadow-2px: 0 2px 4px rgb(171 190 209 / 0.6);
+	--shadow-4px: 0 4px 8px rgb(171 190 209 / 0.4);
+	--shadow-6px: 0 6px 12px rgb(171 190 209 / 0.3);
+	--shadow-8px: 0 8px 16px rgb(171 190 209 / 0.4);
+
 	/* header */
 	--header-h: 4.25rem;
+}
+
+/* inline: --marquee-duration must resolve on the element, not on :root */
+@theme inline {
+	--animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
+
+	@keyframes marquee {
+		to {
+			transform: translateX(-50%);
+		}
+	}
 }
 
 @layer base {
 	body {
 		@apply min-w-80;
+	}
+
+	.swiper-pagination {
+		@apply leading-0;
 	}
 }
 
@@ -83,6 +105,6 @@
 
 @utility container {
 	@variant 2xl {
-		max-inline-size: 72rem;
+		max-inline-size: 73.5rem;
 	}
 }

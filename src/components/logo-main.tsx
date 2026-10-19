@@ -1,17 +1,27 @@
 interface LogoProps {
 	textColor?: string;
+	textSize?: string;
 	iconColorBase?: string;
 	iconColorOutline?: string;
+	iconSize?: string;
+	gapSize?: string;
+	className?: string;
 }
 
 export function MainLogo({
 	textColor = "fill-neutral-black",
+	textSize,
 	iconColorBase = "fill-brand-primary",
 	iconColorOutline = "fill-neutral-black",
+	iconSize,
+	gapSize,
+	className,
 }: LogoProps) {
+	const baseClasses = ["inline-flex items-center", gapSize ?? "gap-x-2"].join(" ");
+
 	return (
-		<strong className="inline-flex items-center gap-x-2">
-			<span className="shrink-0 w-8.75">
+		<strong className={[baseClasses, className].join(" ")}>
+			<span className={["shrink-0", iconSize ?? "w-8.75"].join(" ")}>
 				<svg
 					className="w-full h-auto"
 					viewBox="0 0 35 24"
@@ -41,7 +51,7 @@ export function MainLogo({
 					/>
 				</svg>
 			</span>
-			<span className="w-28">
+			<span className={textSize ?? "w-28"}>
 				<svg
 					className="w-full h-auto"
 					viewBox="0 0 112 21"

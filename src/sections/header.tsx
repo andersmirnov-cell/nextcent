@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
-import { useToggle } from "../components/functions";
+import { useScrolled, useToggle } from "../components/functions";
 import { responsive } from "../components/constants";
 
-import { HeaderNavigation } from "../components/neader-menu";
+import { HeaderNavigation } from "../components/header-navigation";
 import { ButtonIcon } from "../components/button-icon";
 import { MainLogo } from "../components/logo-main";
 
@@ -29,6 +29,7 @@ export function Header() {
 		},
 	];
 	const [isMenuOpen, toggleMenu] = useToggle(false);
+	const isScrolled = useScrolled();
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia(`(max-width: ${responsive.lg - 1}px)`);
@@ -42,13 +43,19 @@ export function Header() {
 		handleMediaQuery(mediaQuery);
 		mediaQuery.addEventListener("change", handleMediaQuery);
 
+		document.body.classList.toggle("overflow-hidden", isMenuOpen);
+
 		return () => {
 			mediaQuery.removeEventListener("change", handleMediaQuery);
 		};
 	}, [isMenuOpen]);
 
+	const headerBg = isScrolled || isMenuOpen ? "bg-neutral-white" : "bg-neutral-silver";
+
 	return (
-		<header className="w-full sticky top-0 inset-x-0 z-50 bg-white">
+		<header
+			className={`w-full sticky top-0 inset-x-0 z-50 transition-colors duration-300 ${headerBg}`}
+		>
 			<div className="container flex flex-wrap items-center gap-x-2.5 h-(--header-h) py-1 lg:py-5.5 2xl:max-w-313.5 lg:h-auto">
 				<a href="/" className="leading-0 me-auto lg:me-10">
 					<MainLogo />

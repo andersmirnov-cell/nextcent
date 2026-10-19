@@ -3,6 +3,7 @@ interface BaseProps {
 	variant?: "primary" | "tertiary";
 	disabled?: boolean;
 	loading?: boolean;
+	icon?: string;
 }
 
 type ButtonAsButton = BaseProps &
@@ -25,6 +26,7 @@ export function BaseButton({
 	className = "",
 	children,
 	href,
+	icon,
 	...rest
 }: ButtonProps) {
 	const btnStyleClass = {
@@ -58,6 +60,14 @@ export function BaseButton({
 			{children}
 			{state === "loading" && (
 				<Spinner className={btnSize === "small" ? "size-4" : "size-6"} />
+			)}
+			{icon && (
+				<span
+					className="size-4 shrink-0 mask-no-repeat mask-contain mask-center bg-current"
+					style={{
+						maskImage: "url(" + icon + ")",
+					}}
+				></span>
 			)}
 		</>
 	);
