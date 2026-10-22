@@ -8,7 +8,12 @@ interface MarqueeProps {
 	groupClassName?: string;
 }
 
-export function Marquee({ children, speed = 50, className = "", groupClassName = "" }: MarqueeProps) {
+export function Marquee({
+	children,
+	speed = 50,
+	className = "",
+	groupClassName = "",
+}: MarqueeProps) {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const groupRef = useRef<HTMLUListElement>(null);
 	const [copies, setCopies] = useState(1);

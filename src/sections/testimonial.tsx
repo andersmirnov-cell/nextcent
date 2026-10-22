@@ -23,7 +23,7 @@ export function Testimonial() {
 				/>
 				<div className="text-body-2 text-neutral-grey py-px">
 					<blockquote className="space-y-4">
-						<q className="block [quotes:none]">
+						<q className="block [quotes:none] font-medium">
 							Maecenas dignissim justo eget nulla rutrum molestie. Maecenas lobortis
 							sem dui, vel rutrum risus tincidunt ullamcorper. Proin eu enim metus.
 							Vivamus sed libero ornare, tristique quam in, gravida enim. Nullam ut
@@ -39,22 +39,22 @@ export function Testimonial() {
 							<strong className="text-brand-primary text-headline-4 block">
 								Tim Smith
 							</strong>
-							<p>British Dragon Boat Racing Association</p>
+							<span className="block">British Dragon Boat Racing Association</span>
 						</cite>
 					</blockquote>
 					<div className="flex flex-col gap-y-10 items-center justify-between gap-5 mt-8 lg:flex-row">
 						<div className="flex flex-wrap items-center gap-x-10.75 gap-y-5">
-							{icons.map((imgUlrl) => {
+							{icons.map((imgUrl) => {
 								return (
-									<figure key={imgUlrl}>
-										<img src={imgUlrl} alt="" />
+									<figure key={imgUrl}>
+										<img src={imgUrl} alt="" />
 									</figure>
 								);
 							})}
 						</div>
 						<a
 							href="#"
-							className="flex items-center gap-2 text-brand-primary whitespace-nowrap text-headline-4"
+							className="flex items-center gap-2 text-brand-primary whitespace-nowrap text-headline-4 xl:-me-1.25 xl:gap-3"
 						>
 							Meet all customers
 							<span

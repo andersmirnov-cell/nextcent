@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Autoplay, EffectFade, Pagination } from "swiper/modules";
+import { isReducedMotion } from "../components/constants";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -13,7 +14,7 @@ const heroSlides = [
 		title: "Lessons and insights",
 		accent: "from 8 years",
 		text: "Where to grow your business as a photographer: site or social media?",
-		button: { text: "Register", href: "#register" },
+		button: { text: "Register", href: "#" },
 		image: heroIllustration,
 		imageAlt:
 			"Developer with a laptop giving a thumbs up next to a large monitor showing code, a flowchart and HTML, CSS and C++ tags",
@@ -22,7 +23,7 @@ const heroSlides = [
 		title: "Lessons and insights",
 		accent: "from 8 years",
 		text: "Where to grow your business as a photographer: site or social media?",
-		button: { text: "Register", href: "#register" },
+		button: { text: "Register", href: "#" },
 		image: heroIllustration,
 		imageAlt:
 			"Developer with a laptop giving a thumbs up next to a large monitor showing code, a flowchart and HTML, CSS and C++ tags",
@@ -31,7 +32,7 @@ const heroSlides = [
 		title: "Lessons and insights",
 		accent: "from 8 years",
 		text: "Where to grow your business as a photographer: site or social media?",
-		button: { text: "Register", href: "#register" },
+		button: { text: "Register", href: "#" },
 		image: heroIllustration,
 		imageAlt:
 			"Developer with a laptop giving a thumbs up next to a large monitor showing code, a flowchart and HTML, CSS and C++ tags",
@@ -39,6 +40,8 @@ const heroSlides = [
 ];
 
 export function Hero() {
+	const allowAutoplay = isReducedMotion ? false : { delay: 5000, pauseOnMouseEnter: true };
+
 	return (
 		<section className="bg-neutral-silver">
 			<Swiper
@@ -48,7 +51,7 @@ export function Hero() {
 				speed={600}
 				slidesPerView={1}
 				loop
-				autoplay={{ delay: 5000, pauseOnMouseEnter: true }}
+				autoplay={allowAutoplay}
 				pagination={{ clickable: true }}
 				className="[--swiper-pagination-bottom:1rem] [--swiper-pagination-bullet-horizontal-gap:0.25rem] [--swiper-pagination-bullet-inactive-color:var(--color-brand-primary)] [--swiper-pagination-bullet-inactive-opacity:0.3] [--swiper-pagination-bullet-size:0.625rem] [--swiper-pagination-color:var(--color-brand-primary)]"
 			>

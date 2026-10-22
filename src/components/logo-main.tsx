@@ -17,10 +17,14 @@ export function MainLogo({
 	gapSize,
 	className,
 }: LogoProps) {
-	const baseClasses = ["inline-flex items-center", gapSize ?? "gap-x-2"].join(" ");
+	const baseClasses = ["inline-flex items-center", gapSize ?? "gap-x-2"];
+
+	if (className) {
+		baseClasses.push(className);
+	}
 
 	return (
-		<strong className={[baseClasses, className].join(" ")}>
+		<strong className={baseClasses.join(" ")}>
 			<span className={["shrink-0", iconSize ?? "w-8.75"].join(" ")}>
 				<svg
 					className="w-full h-auto"

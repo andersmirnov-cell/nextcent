@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { useScrolled, useToggle } from "../components/functions";
+import { useScrolled } from "../components/functions";
 import { responsive } from "../components/constants";
 
 import { HeaderNavigation } from "../components/header-navigation";
@@ -11,24 +11,31 @@ export function Header() {
 	const headerNav = [
 		{
 			text: "Home",
+			isActive: true,
 		},
 		{
 			text: "Service",
+			isActive: false,
 		},
 		{
 			text: "Feature",
+			isActive: false,
 		},
 		{
 			text: "Product",
+			isActive: false,
 		},
 		{
 			text: "Testimonial",
+			isActive: false,
 		},
 		{
 			text: "FAQ",
+			isActive: false,
 		},
 	];
-	const [isMenuOpen, toggleMenu] = useToggle(false);
+
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const isScrolled = useScrolled();
 
 	useEffect(() => {
@@ -36,7 +43,7 @@ export function Header() {
 
 		function handleMediaQuery(e: MediaQueryListEvent | MediaQueryList) {
 			if (!e.matches && isMenuOpen) {
-				toggleMenu();
+				setIsMenuOpen(false);
 			}
 		}
 
@@ -57,7 +64,7 @@ export function Header() {
 			className={`w-full sticky top-0 inset-x-0 z-50 transition-colors duration-300 ${headerBg}`}
 		>
 			<div className="container flex flex-wrap items-center gap-x-2.5 h-(--header-h) py-1 lg:py-5.5 2xl:max-w-313.5 lg:h-auto">
-				<a href="/" className="leading-0 me-auto lg:me-10">
+				<a href="/" className="leading-0 me-auto lg:me-10" aria-label="Nexcent home">
 					<MainLogo />
 				</a>
 				<HeaderNavigation links={headerNav} isOpenMobileMenu={isMenuOpen} />
@@ -66,8 +73,11 @@ export function Header() {
 					type="button"
 					size="small"
 					isOpen={isMenuOpen}
-					onClick={toggleMenu}
+					onClick={() => {
+						setIsMenuOpen((curVal) => !curVal);
+					}}
 					className="lg:hidden"
+					aria-expanded={isMenuOpen}
 				/>
 			</div>
 		</header>

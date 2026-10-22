@@ -21,7 +21,6 @@ function App() {
 				<Clients />
 				<Community />
 				<Unlock
-					className="my-10.5"
 					imageUrl={imgContentOne}
 					imageAlt="Two people next to a large phone screen showing a login form with a profile picture and password fields"
 					titleText="The unseen of spending three years at Pixelgrade"
@@ -37,8 +36,8 @@ function App() {
 				<Testimonial />
 				<CommunityUpdates />
 				<Cta />
-				<Footer />
 			</main>
+			<Footer />
 		</>
 	);
 }

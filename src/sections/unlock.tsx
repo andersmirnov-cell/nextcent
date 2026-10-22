@@ -11,8 +11,12 @@ interface UnlockProps {
 }
 
 export function Unlock({ ...props }: UnlockProps) {
+	const classes = ["my-10.5"];
+	if (props.className) {
+		classes.push(props.className);
+	}
 	return (
-		<section className={["my-10.5", props.className].join(" ")}>
+		<section className={classes.join(" ")}>
 			<div className="container flex flex-col items-center gap-12 lg:flex-row lg:gap-12.5">
 				<img
 					src={props.imageUrl}

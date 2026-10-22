@@ -38,22 +38,58 @@ export function BaseButton({
 		disabled:
 			"bg-neutral-silver border-neutral-silver text-neutral-grey-blue pointer-events-none",
 		tertiary:
-			"bg-transparent text-brand-primary border-transparent hover:bg-neutral-silver hover:border-neutral-silver focus-visible:border-neutral-dark-grey active:bg-tint-5 active:border-tint-5",
+			"bg-neutral-white text-brand-primary border-transparent hover:bg-neutral-silver hover:border-neutral-silver focus-visible:border-neutral-dark-grey active:bg-tint-5 active:border-tint-5",
 		tertiaryLoading: "bg-tint-5 text-brand-primary border-tint-5 pointer-events-none",
 	};
 
 	const state = disabled ? "disabled" : loading ? "loading" : "default";
 
-	const classes = `inline-flex items-center justify-center gap-2 text-center font-medium border-2 cursor-pointer p-1 transition-colors duration-300 focus:outline-0 ${[
-		btnSize === "normal" ? btnStyleClass.normal : "",
-		btnSize === "small" ? btnStyleClass.small : "",
-		state === "disabled" ? btnStyleClass.disabled : "",
-		variant === "primary" && state === "default" ? btnStyleClass.primary : "",
-		variant === "primary" && state === "loading" ? btnStyleClass.primaryLoading : "",
-		variant === "tertiary" && state === "default" ? btnStyleClass.tertiary : "",
-		variant === "tertiary" && state === "loading" ? btnStyleClass.tertiaryLoading : "",
-		className,
-	].join(" ")}`;
+	// const classes = `inline-flex items-center justify-center gap-2 text-center font-medium border-2 cursor-pointer p-1 transition-colors duration-300 focus:outline-0 ${[
+	// 	btnSize === "normal" ? btnStyleClass.normal : "",
+	// 	btnSize === "small" ? btnStyleClass.small : "",
+	// 	state === "disabled" ? btnStyleClass.disabled : "",
+	// 	variant === "primary" && state === "default" ? btnStyleClass.primary : "",
+	// 	variant === "primary" && state === "loading" ? btnStyleClass.primaryLoading : "",
+	// 	variant === "tertiary" && state === "default" ? btnStyleClass.tertiary : "",
+	// 	variant === "tertiary" && state === "loading" ? btnStyleClass.tertiaryLoading : "",
+	// 	className,
+	// ].join(" ")}`;
+
+	const classes = [
+		"inline-flex items-center justify-center gap-2 text-center font-medium border-2 cursor-pointer p-1 transition-colors duration-300 focus:outline-0",
+	];
+
+	if (btnSize === "normal") {
+		classes.push(btnStyleClass.normal);
+	}
+
+	if (btnSize === "small") {
+		classes.push(btnStyleClass.small);
+	}
+
+	if (state === "disabled") {
+		classes.push(btnStyleClass.disabled);
+	}
+
+	if (variant === "primary" && state === "default") {
+		classes.push(btnStyleClass.primary);
+	}
+
+	if (variant === "primary" && state === "loading") {
+		classes.push(btnStyleClass.primaryLoading);
+	}
+
+	if (variant === "tertiary" && state === "default") {
+		classes.push(btnStyleClass.tertiary);
+	}
+
+	if (variant === "tertiary" && state === "loading") {
+		classes.push(btnStyleClass.tertiaryLoading);
+	}
+
+	if (className) {
+		classes.push(className);
+	}
 
 	const content = (
 		<>
@@ -79,10 +115,10 @@ export function BaseButton({
 			<a
 				{...linkProps}
 				href={disabled ? undefined : href}
-				aria-disabled={disabled || undefined}
+				aria-disabled={disabled || state === "loading" || undefined}
 				aria-busy={state === "loading" || undefined}
 				tabIndex={disabled ? -1 : linkProps.tabIndex}
-				className={classes}
+				className={classes.join(" ")}
 			>
 				{content}
 			</a>
@@ -94,9 +130,9 @@ export function BaseButton({
 	return (
 		<button
 			{...buttonProps}
-			disabled={disabled}
+			disabled={disabled || state === "loading"}
 			aria-busy={state === "loading" || undefined}
-			className={classes}
+			className={classes.join(" ")}
 		>
 			{content}
 		</button>

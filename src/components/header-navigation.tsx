@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import { responsive } from "./constants";
 import { BaseButton } from "./button-base";
@@ -6,6 +6,7 @@ import { BaseButton } from "./button-base";
 interface HeaderNavigationLinkProps {
 	text: string;
 	href?: string;
+	isActive?: boolean;
 }
 
 interface HeaderNavigationProps {
@@ -14,9 +15,8 @@ interface HeaderNavigationProps {
 }
 
 export function HeaderNavigation({ links, isOpenMobileMenu }: HeaderNavigationProps) {
-	const [isMobile, setIsMobile] = useState(false);
+	const [isMobile, setIsMobile] = useState(true);
 	const [isAnimationDone, setIsAnimationDone] = useState(false);
-	const navRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia(`(max-width: ${responsive.lg - 1}px)`);
@@ -32,26 +32,6 @@ export function HeaderNavigation({ links, isOpenMobileMenu }: HeaderNavigationPr
 		};
 	}, []);
 
-	useEffect(() => {
-		const nav = navRef.current;
-
-		if (!nav) return;
-
-		function handleTransitionEnd() {
-			if (isOpenMobileMenu) {
-				setIsAnimationDone(true);
-			}
-		}
-
-		if (!isOpenMobileMenu) {
-			setIsAnimationDone(false);
-		}
-
-		nav.addEventListener("transitionend", handleTransitionEnd);
-
-		return () => nav.removeEventListener("transitionend", handleTransitionEnd);
-	}, [isOpenMobileMenu]);
-
 	const menuClassNames = {
 		mobile: "absolute top-full inset-x-0 z-10 bg-white transition-[height] duration-500",
 		opened: "h-[calc(100svh-var(--header-h,68px))]",
@@ -66,28 +46,46 @@ export function HeaderNavigation({ links, isOpenMobileMenu }: HeaderNavigationPr
 		mobile: "mx-auto w-full mt-10 mb-5 max-w-160 md:max-w-3xl",
 	};
 
+	const classes = ["lg:flex lg:gap-2.5 lg:items-center lg:grow"];
+
+	if (isMobile) {
+		classes.push(menuClassNames.mobile);
+
+		if (isOpenMobileMenu) {
+			classes.push(menuClassNames.opened);
+		} else {
+			classes.push(menuClassNames.closed);
+		}
+
+		if (isAnimationDone && isOpenMobileMenu) {
+			classes.push(menuClassNames.scrollable);
+		} else {
+			classes.push(menuClassNames.disableScroll);
+		}
+	}
+
 	return (
 		<nav
-			ref={navRef}
-			className={[
-				"lg:flex lg:gap-2.5 lg:items-center lg:grow",
-				isMobile ? menuClassNames.mobile : "",
-				isOpenMobileMenu && isMobile ? menuClassNames.opened : "",
-				!isOpenMobileMenu && isMobile ? menuClassNames.closed : "",
-				isMobile && isAnimationDone ? menuClassNames.scrollable : "",
-				isMobile && !isAnimationDone ? menuClassNames.disableScroll : "",
-			].join(" ")}
+			className={classes.join(" ")}
+			inert={!isOpenMobileMenu && isMobile}
+			onTransitionEnd={(e) => {
+				if (e.target === e.currentTarget && e.propertyName === "height") {
+					setIsAnimationDone(Boolean(isOpenMobileMenu));
+				}
+			}}
 		>
 			<ul
 				className={`flex text-body-2 px-3 lg:px-0 lg:flex-wrap lg:justify-center lg:gap-x-12.5 lg:grow ${isMobile ? menuListClassNames.mobile : ""}`}
 			>
 				{links.map((l) => {
+					const linkClass = ["hover:text-brand-primary transition-colors duration-300"];
+
+					if (l.isActive) {
+						linkClass.push("font-medium");
+					}
 					return (
 						<li key={l.href ?? l.text}>
-							<a
-								href={l.href ?? "#"}
-								className="hover:text-brand-primary transition-colors duration-300"
-							>
+							<a href={l.href ?? "#"} className={linkClass.join(" ")}>
 								{l.text}
 							</a>
 						</li>

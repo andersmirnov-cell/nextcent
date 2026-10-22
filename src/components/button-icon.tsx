@@ -39,6 +39,7 @@ export function ButtonIcon({
 				{...rest}
 				type={type}
 				className={`${btnDefClasses} ${color} ${btnSize[size]} ${className} relative`}
+				aria-expanded={isOpen}
 			>
 				<span
 					className={`${mobileMenuLineClasses.default} ${isOpen ? mobileMenuLineClasses.opened : mobileMenuLineClasses.closed}`}
@@ -49,7 +50,9 @@ export function ButtonIcon({
 				<span
 					className={`${mobileMenuLineClasses.default} ${isOpen ? mobileMenuLineClasses.opened : mobileMenuLineClasses.closed}`}
 				></span>
-				<span className="sr-only">{srText ?? "Open Mobile Nav"}</span>
+				<span className="sr-only">
+					{srText ?? (!isOpen ? "Open Mobile Nav" : "Close Mobile Nav")}
+				</span>
 			</button>
 		);
 	}
@@ -88,7 +91,7 @@ export function ButtonIcon({
 					</svg>
 				</span>
 
-				<span className="sr-only">{srText ? srText : "Search"}</span>
+				<span className="sr-only">{srText ?? "Search"}</span>
 			</button>
 		);
 	}

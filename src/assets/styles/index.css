@@ -97,13 +97,9 @@
 	}
 }
 
-@layer components {
-	.container {
-		@apply mx-auto px-3;
-	}
-}
-
 @utility container {
+	@apply mx-auto px-3;
+
 	@variant 2xl {
 		max-inline-size: 73.5rem;
 	}
