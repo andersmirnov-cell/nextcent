@@ -1,73 +1,78 @@
-# React + TypeScript + Vite
+# Nexcent — Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive one-page landing site built with React, TypeScript and Tailwind CSS from the
+free Figma community design
+[_"Minimal Landing Page Design"_](https://www.figma.com/community/file/1222060007934600841/minimal-landing-page-design-website-home-page-design-agency-website-ui-design)
+by [Muntasir Billah](https://www.figma.com/@itsmuntasirb).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Responsive layout** from 320px up to 1440px, based on the 1440px desktop design
+- **Sticky header** that changes background on scroll, with an animated mobile menu
+- **Hero slider** (Swiper) with fade effect, pagination and autoplay
+- **Client logos marquee**: an endless CSS scroll that adapts its speed to the logo width and
+  pauses on hover
+- **Animated counters** that count up when the Achievements section scrolls into view
+- **Subscribe form** with email validation and a success state
+- **Accessibility**: semantic sections, labels for icon-only buttons and links, a keyboard-safe
+  mobile menu, and support for `prefers-reduced-motion` (slider autoplay, marquee and
+  counters turn off)
+- Design tokens (colors, typography, shadows) defined once in the Tailwind theme
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Swiper](https://swiperjs.com/) for the hero slider
+- [Font Awesome](https://fontawesome.com/) icons
+- [Inter](https://fontsource.org/fonts/inter) variable font via Fontsource
+- ESLint and Prettier
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Requires Node.js 20.19+ or 22.12+.
 
-```js
-export default defineConfig([
-	globalIgnores(["dist"]),
-	{
-		files: ["**/*.{ts,tsx}"],
-		extends: [
-			// Other configs...
-
-			// Remove tseslint.configs.recommended and replace with this
-			tseslint.configs.recommendedTypeChecked,
-			// Alternatively, use this for stricter rules
-			tseslint.configs.strictTypeChecked,
-			// Optionally, add this for stylistic rules
-			tseslint.configs.stylisticTypeChecked,
-
-			// Other configs...
-		],
-		languageOptions: {
-			parserOptions: {
-				project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-				tsconfigRootDir: import.meta.dirname,
-			},
-			// other options...
-		},
-	},
-]);
+```bash
+git clone git@github.com:andersmirnov-cell/nextcent.git
+cd nextcent
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Then open the local URL that Vite prints (usually http://localhost:5173).
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+## Scripts
 
-export default defineConfig([
-	globalIgnores(["dist"]),
-	{
-		files: ["**/*.{ts,tsx}"],
-		extends: [
-			// Other configs...
-			// Enable lint rules for React
-			reactX.configs["recommended-typescript"],
-			// Enable lint rules for React DOM
-			reactDom.configs.recommended,
-		],
-		languageOptions: {
-			parserOptions: {
-				project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-				tsconfigRootDir: import.meta.dirname,
-			},
-			// other options...
-		},
-	},
-]);
+| Command                | What it does                            |
+| ---------------------- | --------------------------------------- |
+| `npm run dev`          | Start the dev server with hot reload    |
+| `npm run build`        | Type-check and build to `dist/`         |
+| `npm run preview`      | Serve the production build locally      |
+| `npm run lint`         | Run ESLint                              |
+| `npm run format`       | Format all files with Prettier          |
+| `npm run format:check` | Check formatting without changing files |
+
+## Project structure
+
 ```
+src/
+├── App.tsx               # Page composition: all sections in order
+├── main.tsx              # Entry point
+├── assets/
+│   ├── images/           # SVG and PNG assets exported from Figma
+│   └── styles/index.css  # Tailwind import, theme tokens, marquee animation
+├── components/           # Reusable UI: buttons, logo, navigation, marquee, counter, form, hooks
+└── sections/             # Page sections: header, hero, clients, community, … footer
+```
+
+## Credits
+
+- **Design:**
+  [Minimal Landing Page Design | Website Home Page Design | Agency Website UI Design](https://www.figma.com/community/file/1222060007934600841/minimal-landing-page-design-website-home-page-design-agency-website-ui-design)
+  by [Muntasir Billah](https://www.figma.com/@itsmuntasirb), licensed under
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: the static design was
+  turned into a responsive React website, with a hero slider, a scrolling client logo strip,
+  animated counters, a mobile menu and small spacing adjustments.
+- **Code:** [andersmirnov-cell](https://github.com/andersmirnov-cell)
+- Text content is placeholder copy from the design.
